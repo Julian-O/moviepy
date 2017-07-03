@@ -85,11 +85,19 @@ install:
   - "python -c \"import struct; print(struct.calcsize('P') * 8)\""
   - "ECHO %PYTHON_VERSION% %MINICONDA%"
   
-
   # Upgrade to the latest version of pip to avoid it displaying warnings
   # about it being out of date.
   - "pip install --disable-pip-version-check --user --upgrade pip"
 
+  # Installing ffmpeg
+  - curl -kLO https://ffmpeg.zeranoe.com/builds/win%PYTH_ARCH%/static/ffmpeg-3.3.2-win%PYTH_ARCH%-static.zip
+  - 7z x ffmpeg-3.3.2-win%PYTH_ARCH%-static.zip
+  - set FFMPEG_DEV_PATH=%CD%\ffmpeg-3.3.2-win%PYTH_ARCH%-static
+#  # Installing ffmpeg shared
+#  - curl -kLO https://ffmpeg.zeranoe.com/builds/win32/shared/ffmpeg-3.3.1-win32-shared.zip
+#  - 7z x ffmpeg-3.3.1-win32-shared.zip
+#  - set FFMPEG_SHARED_PATH=%CD%\ffmpeg-3.3.1-win32-shared
+  
 
   # Let Miniconda include numpy for us.
   - "set PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
