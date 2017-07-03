@@ -96,10 +96,11 @@ install:
   - set FFMPEG_DEV_PATH=%CD%\ffmpeg-3.3.2-win%PYTHON_ARCH%-static
   - set FFMPEG_BINARY=%CD%\ffmpeg-3.3.2-win%PYTHON_ARCH%-static\ffmpeg.exe
   - "ECHO FFMPEG is %FFMPEG_BINARY%"
-  - ps: "ls %FFMPEG_BINARY%"
+  - ps: "ls \"C:\\projects\\moviepy\\ffmpeg-3.3.2-win32-static\\ffmpeg.exe\""
+  - ps: "ls \"%FFMPEG_BINARY%\""
    
 
-  # Let Miniconda include numpy for us.
+  # Let Miniconda include the harder packages for us.
   - "set PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q conda
