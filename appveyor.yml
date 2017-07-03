@@ -14,26 +14,32 @@ environment:
 #    - PYTHON: "C:\\Python27"
 #      PYTHON_VERSION: "2.7.x" # currently 2.7.9
 #      PYTHON_ARCH: "32"
+#      MINICONDA: C:\Miniconda
 
 #    - PYTHON: "C:\\Python27-x64"
 #      PYTHON_VERSION: "2.7.x" # currently 2.7.9
 #      PYTHON_ARCH: "64"
+#      MINICONDA: C:\Miniconda
 
 #    - PYTHON: "C:\\Python33"
 #      PYTHON_VERSION: "3.3.x" # currently 3.3.5
 #      PYTHON_ARCH: "32"
+#      MINICONDA: C:\Miniconda3
 
 #    - PYTHON: "C:\\Python33-x64"
 #      PYTHON_VERSION: "3.3.x" # currently 3.3.5
 #      PYTHON_ARCH: "64"
+#      MINICONDA: C:\Miniconda3
 
     - PYTHON: "C:\\Python34"
       PYTHON_VERSION: "3.4.x" # currently 3.4.3
       PYTHON_ARCH: "32"
+      MINICONDA: C:\Miniconda3
 
 #    - PYTHON: "C:\\Python34-x64"
 #      PYTHON_VERSION: "3.4.x" # currently 3.4.3
 #      PYTHON_ARCH: "64"
+#      MINICONDA: C:\Miniconda3
 
     # Python versions not pre-installed
 
@@ -69,10 +75,22 @@ install:
   # Check that we have the expected version and architecture for Python
   - "python --version"
   - "python -c \"import struct; print(struct.calcsize('P') * 8)\""
+  - "ECHO %PYTHON_VERSION% %MINICONDA%"
+  
 
   # Upgrade to the latest version of pip to avoid it displaying warnings
   # about it being out of date.
   - "pip install --disable-pip-version-check --user --upgrade pip"
+
+
+  # Let Miniconda include numpy for us.
+  - "set PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
+  - conda config --set always_yes yes --set changeps1 no
+  - conda update -q conda
+  - conda info -a
+  - "conda create -q -n test-environment python=%PYTHON_VERSION% numpy"
+  - activate test-environment
+  
   
 build_script:
 
