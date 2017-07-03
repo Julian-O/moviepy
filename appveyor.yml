@@ -96,7 +96,7 @@ install:
   - set FFMPEG_DEV_PATH=%CD%\ffmpeg-3.3.2-win%PYTHON_ARCH%-static
   - set FFMPEG_BINARY=%CD%\ffmpeg-3.3.2-win%PYTHON_ARCH%-static\bin\ffmpeg.exe
   - "ECHO FFMPEG is %FFMPEG_BINARY%"
-  - ps: "ls \"C:\\projects\\moviepy\\ffmpeg-3.3.2-win32-static\bin""
+  - ps: "ls \"C:\\projects\\moviepy\\ffmpeg-3.3.2-win32-static\\bin""
   - ps: "ls \"%FFMPEG_BINARY%\""
    
 
