@@ -39,17 +39,17 @@ environment:
 #    - PYTHON: "C:\\Python34-x64"
 #      PYTHON_VERSION: "3.4.4"
 #      PYTHON_ARCH: "64"
-#      MINICONDA: C:\Miniconda3
+#      MINICONDA: C:\Miniconda3-x64
 
 #    - PYTHON: "C:\\Python34-x64"
 #      PYTHON_VERSION: "3.5.3"
 #      PYTHON_ARCH: "64"
-#      MINICONDA: C:\Miniconda3
+#      MINICONDA: C:\Miniconda35-x64
 
 #    - PYTHON: "C:\\Python34-x64"
 #      PYTHON_VERSION: "3.6.1"
 #      PYTHON_ARCH: "64"
-#      MINICONDA: C:\Miniconda3
+#      MINICONDA: C:\Miniconda36-x64
 
 install:
   # If there is a newer build queued for the same PR, cancel this one.
@@ -96,7 +96,7 @@ install:
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q conda
   - conda info -a
-  - "conda create -q -n test-environment python=%PYTHON_VERSION% numpy"
+  - "conda create -q -n test-environment python=%PYTHON_VERSION% numpy matplotlib"
   - activate test-environment
   
   
