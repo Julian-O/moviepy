@@ -52,6 +52,10 @@ install:
 
   - ECHO "Installed SDKs:"
   - ps: "ls \"C:/Program Files/Microsoft SDKs/Windows\""
+  
+  - ECHO "Installed projects:"
+  - ps: "ls \"C:\\projects\""
+  - ps: "ls \"C:\\projects\\moviepy\""
 
   # Install Python (from the official .msi of http://python.org) and pip when
   # not already installed.
