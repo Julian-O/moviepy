@@ -90,14 +90,13 @@ install:
   - "pip install --disable-pip-version-check --user --upgrade pip"
 
   # Installing ffmpeg
+  - "ECHO Downloading https://ffmpeg.zeranoe.com/builds/win%PYTH_ARCH%/static/ffmpeg-3.3.2-win%PYTH_ARCH%-static.zip"
   - curl -kLO https://ffmpeg.zeranoe.com/builds/win%PYTH_ARCH%/static/ffmpeg-3.3.2-win%PYTH_ARCH%-static.zip
   - 7z x ffmpeg-3.3.2-win%PYTH_ARCH%-static.zip
   - set FFMPEG_DEV_PATH=%CD%\ffmpeg-3.3.2-win%PYTH_ARCH%-static
-#  # Installing ffmpeg shared
-#  - curl -kLO https://ffmpeg.zeranoe.com/builds/win32/shared/ffmpeg-3.3.1-win32-shared.zip
-#  - 7z x ffmpeg-3.3.1-win32-shared.zip
-#  - set FFMPEG_SHARED_PATH=%CD%\ffmpeg-3.3.1-win32-shared
-  
+  - set FFMPEG_BINARY=%CD%\ffmpeg-3.3.2-win%PYTH_ARCH%-static\ffmpeg.exe
+  - "ECHO FFMPEG is %FFMPEG_BINARY%"
+  - ps: \"ls %FFMPEG_BINARY%\"
 
   # Let Miniconda include numpy for us.
   - "set PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
