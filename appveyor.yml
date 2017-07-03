@@ -77,7 +77,8 @@ install:
 build_script:
 
   # Build the compiled extension
-  - "%CMD_IN_ENV% python c:\\projects\\moviepy\\setup.py build"
+  - ECHO "Removed: %CMD_IN_ENV%"
+  - "python c:\\projects\\moviepy\\setup.py build"
 
 test_script:
   # Run the project tests
