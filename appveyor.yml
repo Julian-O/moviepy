@@ -80,11 +80,11 @@ install:
   - curl -fskLO ftp://ftp.fifi.org/pub/ImageMagick/binaries/ImageMagick-6.9.8-10-Q16-x64-static.exe
   - "ECHO Installing ImageMagick"
   - "ImageMagick-6.9.8-10-Q16-x64-static.exe /verySILENT /SP"
-  - set IMAGEMAGICK_BINARY=c:\\Program Files\\ImackMagick-6.9.8-Q16\\convert.exe
-  - set FFMPEG_BINARY=c:\\Program Files\\ImackMagick-6.9.8-Q16\\ffmpeg.exe
+  - set IMAGEMAGICK_BINARY=c:\\Program Files\\ImageMagick-6.9.8-Q16\\convert.exe
+  - set FFMPEG_BINARY=c:\\Program Files\\ImageMagick-6.9.8-Q16\\ffmpeg.exe
   - "@ECHO FFMPEG can be found at: %FFMPEG_BINARY%"
   - ps: "ls \"c:\\Program Files\""
-  - ps: "ls \"c:\\Program Files\\ImackMagick-6.9.8-Q16\""
+  - ps: "ls \"c:\\Program Files\\ImageMagick-6.9.8-Q16\""
 
   # Install Python (from the official .msi of http://python.org) and pip when
   # not already installed.
