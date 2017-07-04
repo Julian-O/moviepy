@@ -83,6 +83,7 @@ install:
   - set IMAGEMAGICK_BINARY=c:\\Program Files\\ImackMagick-6.9.8-Q16\\convert.exe
   - set FFMPEG_BINARY=c:\\Program Files\\ImackMagick-6.9.8-Q16\\ffmpeg.exe
   - "@ECHO FFMPEG can be found at: %FFMPEG_BINARY%"
+  - ps: "ls \"c:\\Program Files\""
   - ps: "ls \"c:\\Program Files\\ImackMagick-6.9.8-Q16\""
 
   # Install Python (from the official .msi of http://python.org) and pip when
