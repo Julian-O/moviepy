@@ -73,12 +73,17 @@ install:
   # - ps: "ls \"C:\\projects\""
   # - ps: "ls \"C:\\projects\\moviepy\""
   
-  # Installing ImageMagick
+  # Installing ImageMagick (which also installs ffmpeg)
   - "ECHO Downloading ImageMagick"
     # Versions >=7.0 have problems - executables changed names.
     # Assume 64-bit. Need to change to x86 for 32-bit.
   - curl -fskLO ftp://ftp.fifi.org/pub/ImageMagick/binaries/ImageMagick-6.9.8-10-Q16-x64-static.exe
+  - "ECHO Installing ImageMagick"
   - "ImageMagick-6.9.8-10-Q16-x64-static.exe /verySILENT /SP"
+  - set IMAGEMAGICK_BINARY=c:\\Program Files\\ImackMagick-6.9.8-Q16\\convert.exe
+  - set FFMPEG_BINARY=c:\\Program Files\\ImackMagick-6.9.8-Q16\\ffmpeg.exe
+  - "@ECHO FFMPEG can be found at: %FFMPEG_BINARY%"
+  - ps: "ls \"c:\\Program Files\\ImackMagick-6.9.8-Q16\""
 
   # Install Python (from the official .msi of http://python.org) and pip when
   # not already installed.
