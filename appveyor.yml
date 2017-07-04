@@ -70,6 +70,13 @@ install:
   - ECHO "Installed projects:"
   - ps: "ls \"C:\\projects\""
   - ps: "ls \"C:\\projects\\moviepy\""
+  
+  # Installing ImageMagick
+  - "ECHO Downloading ImageMagick"
+    # Versions >=7.0 have problems - executables changed names.
+    # Assume 64-bit. Need to change to x86 for 32-bit.
+  - curl -fskLO ftp://ftp.fifi.org/pub/ImageMagick/binaries/ImageMagick-6.9.8-10-Q16-x64-static.exe
+  - "ImageMagick-6.9.8-10-Q16-x64-static.exe"
 
   # Install Python (from the official .msi of http://python.org) and pip when
   # not already installed.
@@ -91,14 +98,13 @@ install:
 
   # Installing ffmpeg
   - "ECHO Downloading https://ffmpeg.zeranoe.com/builds/win%PYTHON_ARCH%/static/ffmpeg-3.3.2-win%PYTHON_ARCH%-static.zip"
-  - curl -kLO https://ffmpeg.zeranoe.com/builds/win%PYTHON_ARCH%/static/ffmpeg-3.3.2-win%PYTHON_ARCH%-static.zip
+  - curl -fskLO https://ffmpeg.zeranoe.com/builds/win%PYTHON_ARCH%/static/ffmpeg-3.3.2-win%PYTHON_ARCH%-static.zip
   - 7z x ffmpeg-3.3.2-win%PYTHON_ARCH%-static.zip
   - set FFMPEG_DEV_PATH=%CD%\ffmpeg-3.3.2-win%PYTHON_ARCH%-static
   - set FFMPEG_BINARY=%CD%\ffmpeg-3.3.2-win%PYTHON_ARCH%-static\bin\ffmpeg.exe
   - "ECHO FFMPEG is %FFMPEG_BINARY%"
-   
-
-  # Let Miniconda include the harder packages for us.
+  
+  # Let Miniconda include the harder Python packages for us.
   - "set PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q conda
