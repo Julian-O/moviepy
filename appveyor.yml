@@ -27,8 +27,6 @@ environment:
       MINICONDA: C:\Miniconda
       CONDA_INSTALL: scipy opencv-python
       
-
-    ** NO MATPLOTLIB SUPPORT **
     - PYTHON: "C:\\Python33-x64"
       PYTHON_VERSION: "3.3.5"
       PYTHON_ARCH: "64"
