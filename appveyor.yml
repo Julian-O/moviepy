@@ -122,11 +122,15 @@ install:
   - conda update -q conda
   - conda info -a
     
-  # Let Miniconda include the harder Python packages for us, because PIP finds it challenging.
-  - "conda create -q -n test-environment python=%PYTHON_VERSION% %CONDA_INSTALL%"
-  - activate test-environment
-    
 build_script:
+
+  # Dump a list of required files.
+  - "%CMD_IN_ENV% python c:\\projects\\moviepy\\setup.py egg_info"
+  
+  # Let Miniconda  install them because PIP finds some packages challenging.
+  - "conda create -q -n test-environment python=%PYTHON_VERSION% --file moviepy.egg-info/requres.txt"
+  - activate test-environment
+  
   # Build the compiled extension
   - "%CMD_IN_ENV% python c:\\projects\\moviepy\\setup.py build"
 
