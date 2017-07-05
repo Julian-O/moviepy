@@ -60,7 +60,7 @@ if 'build_docs' in sys.argv:
 exec(open('moviepy/version.py').read()) # loads __version__
 
 # Define the requirements for specific execution needs.
-requires = ['decorator>=4.0.2,<=4.0.11', 'imageio==2.1.2', 'tqdm==4.11.2', 'numpy']
+requires = ['decorator>=4.0.2,<=4.0.11', 'imageio==2.1.2', 'tqdm>=4.11.2,<=4.14.0', 'numpy']
 optional_reqs = []
 documentation_reqs = ['pygame==1.9.3', 'numpydoc>=0.6.0',
     'sphinx_rtd_theme>=0.1.10b0', 'Sphinx>=1.5.2'] + optional_reqs
