@@ -25,43 +25,43 @@ environment:
       PYTHON_VERSION: "2.7.13"
       PYTHON_ARCH: "64"
       MINICONDA: C:\Miniconda
-      CONDA_INSTALL: scipy numpy
+      CONDA_INSTALL: scipy numpy tqdm==4.11.2 
       
     - PYTHON: "C:\\Python33-x64"
       PYTHON_VERSION: "3.3.5"
       PYTHON_ARCH: "64"
       MINICONDA: C:\Miniconda3-x64
-      CONDA_INSTALL:  numpy
+      CONDA_INSTALL: numpy tqdm==4.11.2
 
     - PYTHON: "C:\\Python34-x64"
       PYTHON_VERSION: "3.4.4"
       PYTHON_ARCH: "64"
       MINICONDA: C:\Miniconda3-x64
-      CONDA_INSTALL: matplotlib scikit-learn scipy opencv-python numpy
+      CONDA_INSTALL: matplotlib scikit-learn scipy opencv-python numpy tqdm==4.11.2
 
     - PYTHON: "C:\\Python35-x64"
       PYTHON_VERSION: "3.5.3"
       PYTHON_ARCH: "64"
       MINICONDA: C:\Miniconda35-x64
-      CONDA_INSTALL: matplotlib scikit-learn scipy opencv-python numpy
+      CONDA_INSTALL: matplotlib scikit-learn scipy opencv-python numpy tqdm==4.11.2
 
     - PYTHON: "C:\\Python36-x64"
       PYTHON_VERSION: "3.6.1"
       PYTHON_ARCH: "64"
       MINICONDA: C:\Miniconda36-x64
-      CONDA_INSTALL: matplotlib scikit-learn scipy opencv-python numpy
+      CONDA_INSTALL: matplotlib scikit-learn scipy opencv-python numpy tqdm==4.11.2
 
     - PYTHON: "C:\\Python27"
       PYTHON_VERSION: "2.7.13"
       PYTHON_ARCH: "32"
       MINICONDA: C:\Miniconda
-      CONDA_INSTALL: matplotlib scikit-learn scipy opencv-python numpy
+      CONDA_INSTALL: matplotlib scikit-learn scipy opencv-python numpy tqdm==4.11.2
 
     - PYTHON: "C:\\Python34-x64"
       PYTHON_VERSION: "3.6.1"
       PYTHON_ARCH: "32"
       MINICONDA: C:\Miniconda36
-      CONDA_INSTALL: matplotlib scikit-learn scipy numpy
+      CONDA_INSTALL: matplotlib scikit-learn scipy numpy tqdm==4.11.2
 
 install:
   # If there is a newer build queued for the same PR, cancel this one.
