@@ -1,6 +1,11 @@
-# Minimal Appveyor file to install just MatPlotLib!
+# This file is used to configure the AppVeyor CI system, for testing on Windows machines.
 #
-# Some ideas loosely based on https://github.com/ogrisel/python-appveyor-demo
+# Code loosely based on https://github.com/ogrisel/python-appveyor-demo
+# 
+# To test with AppVeyor:
+#    Register on appveyor.com with your GitHub account.
+#    Create a new appveyor project, using the GitHub details.
+#    Ideally, configure notifications to post back to GitHub. (Untested)
 
 environment:
   global:
@@ -11,15 +16,31 @@ environment:
 
   matrix:
   
+     # MoviePy supports Python 2.7 and 3.3 onwards.
+     # However, matplotlib is not available on Python 3.3, so skip that.
+     # Test the latest known patch in each version
+     # Test the oldest and the newest 32 bit release. 64-bit otherwise.
+  
     - PYTHON: "C:\\Python27-x64"
       PYTHON_VERSION: "2.7.13"
       PYTHON_ARCH: "64"
       MINICONDA: C:\Miniconda
 
-    - PYTHON: "C:\\Python33-x64"
-      PYTHON_VERSION: "3.3.5"
+#    ** NO MATPLOTLIB SUPPORT **
+#    - PYTHON: "C:\\Python33-x64"
+#      PYTHON_VERSION: "3.3.5"
+#      PYTHON_ARCH: "64"
+#      MINICONDA: C:\Miniconda3-x64
+
+    - PYTHON: "C:\\Python34-x64"
+      PYTHON_VERSION: "3.4.4"
       PYTHON_ARCH: "64"
       MINICONDA: C:\Miniconda3-x64
+
+    - PYTHON: "C:\\Python35-x64"
+      PYTHON_VERSION: "3.5.3"
+      PYTHON_ARCH: "64"
+      MINICONDA: C:\Miniconda35-x64
 
     - PYTHON: "C:\\Python36-x64"
       PYTHON_VERSION: "3.6.1"
@@ -37,6 +58,15 @@ environment:
       MINICONDA: C:\Miniconda36
 
 install:
+  # If there is a newer build queued for the same PR, cancel this one.
+  # The AppVeyor 'rollout builds' option is supposed to serve the same
+  # purpose but it is problematic because it tends to cancel builds pushed
+  # directly to master instead of just PR builds (or the converse).
+  # credits: JuliaLang developers.
+  - ps: if ($env:APPVEYOR_PULL_REQUEST_NUMBER -and $env:APPVEYOR_BUILD_NUMBER -ne ((Invoke-RestMethod `
+        https://ci.appveyor.com/api/projects/$env:APPVEYOR_ACCOUNT_NAME/$env:APPVEYOR_PROJECT_SLUG/history?recordsNumber=50).builds | `
+        Where-Object pullRequestId -eq $env:APPVEYOR_PULL_REQUEST_NUMBER)[0].buildNumber) { `
+          throw "There are newer queued builds for this pull request, failing early." }
   
   # Dump some debugging information about the machine.
   # - ECHO "Filesystem root:"
@@ -49,18 +79,69 @@ install:
   # - ps: "ls \"C:\\projects\""
   # - ps: "ls \"C:\\projects\\moviepy\""
   
+  # Installing ImageMagick (which also installs ffmpeg)
+  - "ECHO Downloading ImageMagick"
+    # Versions >=7.0 have problems - executables changed names.
+    # Assume 64-bit. Need to change to x86 for 32-bit.
+  - curl -fskLO ftp://ftp.fifi.org/pub/ImageMagick/binaries/ImageMagick-6.9.8-10-Q16-x64-static.exe
+  - "ECHO Installing ImageMagick"
+  - "ImageMagick-6.9.8-10-Q16-x64-static.exe /verySILENT /SP"
+  - set IMAGEMAGICK_BINARY=c:\\Program Files\\ImageMagick-6.9.8-Q16\\convert.exe
+  - set FFMPEG_BINARY=c:\\Program Files\\ImageMagick-6.9.8-Q16\\ffmpeg.exe
+
+  # Install Python (from the official .msi of http://python.org) and pip when
+  # not already installed.
+  # Note: Never seen this happen. 
+  # When it does, copy install.ps1 from  https://github.com/ogrisel/python-appveyor-demo into Appveyor
+  # directory and submit it to the project.
+  - ps: if (-not(Test-Path($env:PYTHON))) { & appveyor\install.ps1 }
+
   # Prepend newly installed Python to the PATH of this build (this cannot be
   # done from inside the powershell script as it would require to restart
   # the parent CMD process).
   - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
 
+  # Check that we have the expected version and architecture for Python
+  - "python --version"
+  - "python -c \"import struct; print(struct.calcsize('P') * 8)\""
+  - "ECHO %PYTHON_VERSION% %MINICONDA%"
+  
+  # Upgrade to the latest version of pip to avoid it displaying warnings
+  # about it being out of date.
+  - "pip install --disable-pip-version-check --user --upgrade pip"
+
+  # Let Miniconda include the harder Python packages for us, because PIP finds it challenging.
   - "set PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q conda
   - conda info -a
-  - "conda create -q -n test-environment python=%PYTHON_VERSION% matplotlib=2.0.2"
+  # Why is there a conflict?
+  - conda info cycler
+  - conda info matplotlib
+  - "conda create -q -n test-environment python=%PYTHON_VERSION% numpy scipy scikit-image pillow scikit-learn"
+  - "conda install -c conda-forge matplotlib=2.0.2"
+  - activate test-environment
+  - pip freeze
     
 build_script:
 
   # Build the compiled extension
-  - ECHO "I don't actually build anything!"
+  - "%CMD_IN_ENV% python c:\\projects\\moviepy\\setup.py build"
+
+test_script:
+  # Run the project tests
+  - "%CMD_IN_ENV% python c:\\projects\\moviepy\\setup.py test"
+
+after_test:
+  # If tests are successful, create binary packages for the project.
+  - "%CMD_IN_ENV% python c:\\projects\\moviepy\\setup.py bdist_wheel"
+  - "%CMD_IN_ENV% python c:\\projects\\moviepy\\setup.py bdist_wininst"
+  - "%CMD_IN_ENV% python c:\\projects\\moviepy\\setup.py bdist_msi"
+  - ps: "ls dist"
+
+artifacts:
+  # Archive the generated packages in the ci.appveyor.com build report.
+  - path: dist\*
+
+#on_success:
+#  - TODO: upload the content of dist/*.whl to a public wheelhouse
