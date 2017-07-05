@@ -77,7 +77,7 @@ documentation_reqs = [
 test_reqs = [
     'pytest>=2.8.0,<3.0',
     'nose', 
-    `sklearn',
+    'sklearn',
     'pytest-cov',
     'coveralls'
     ] + optional_reqs
