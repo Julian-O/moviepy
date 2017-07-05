@@ -25,37 +25,46 @@ environment:
       PYTHON_VERSION: "2.7.13"
       PYTHON_ARCH: "64"
       MINICONDA: C:\Miniconda
+      CONDA_INSTALL: scipy opencv-python
+      
 
-#    ** NO MATPLOTLIB SUPPORT **
-#    - PYTHON: "C:\\Python33-x64"
-#      PYTHON_VERSION: "3.3.5"
-#      PYTHON_ARCH: "64"
-#      MINICONDA: C:\Miniconda3-x64
+    ** NO MATPLOTLIB SUPPORT **
+    - PYTHON: "C:\\Python33-x64"
+      PYTHON_VERSION: "3.3.5"
+      PYTHON_ARCH: "64"
+      MINICONDA: C:\Miniconda3-x64
+      CONDA_INSTALL: 
 
     - PYTHON: "C:\\Python34-x64"
       PYTHON_VERSION: "3.4.4"
       PYTHON_ARCH: "64"
       MINICONDA: C:\Miniconda3-x64
+      CONDA_INSTALL: matplotlib scikit-learn scipy opencv-python 
+
 
     - PYTHON: "C:\\Python35-x64"
       PYTHON_VERSION: "3.5.3"
       PYTHON_ARCH: "64"
       MINICONDA: C:\Miniconda35-x64
+      CONDA_INSTALL: matplotlib scikit-learn scipy opencv-python 
 
     - PYTHON: "C:\\Python36-x64"
       PYTHON_VERSION: "3.6.1"
       PYTHON_ARCH: "64"
       MINICONDA: C:\Miniconda36-x64
+      CONDA_INSTALL: matplotlib scikit-learn scipy opencv-python 
 
     - PYTHON: "C:\\Python27"
       PYTHON_VERSION: "2.7.13"
       PYTHON_ARCH: "32"
       MINICONDA: C:\Miniconda
+      CONDA_INSTALL: matplotlib scikit-learn scipy opencv-python 
 
     - PYTHON: "C:\\Python34-x64"
       PYTHON_VERSION: "3.6.1"
       PYTHON_ARCH: "32"
       MINICONDA: C:\Miniconda36
+      CONDA_INSTALL: matplotlib scikit-learn scipy opencv-python 
 
 install:
   # If there is a newer build queued for the same PR, cancel this one.
@@ -110,21 +119,17 @@ install:
   # about it being out of date.
   - "pip install --disable-pip-version-check --user --upgrade pip"
 
-  # Let Miniconda include the harder Python packages for us, because PIP finds it challenging.
+  # Prepare Miniconda.
   - "set PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q conda
   - conda info -a
-  # Why is there a conflict?
-  - conda info cycler
-  - conda info matplotlib
-  - "conda create -q -n test-environment python=%PYTHON_VERSION% numpy scipy scikit-image pillow scikit-learn"
-  - "conda install -c conda-forge matplotlib=2.0.2"
+    
+  # Let Miniconda include the harder Python packages for us, because PIP finds it challenging.
+  - "conda create -q -n test-environment python=%PYTHON_VERSION% %CONDA_INSTALL%"
   - activate test-environment
-  - pip freeze
     
 build_script:
-
   # Build the compiled extension
   - "%CMD_IN_ENV% python c:\\projects\\moviepy\\setup.py build"
 
