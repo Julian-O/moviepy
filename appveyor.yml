@@ -60,3 +60,7 @@ install:
   - conda info -a
   - "conda create -q -n test-environment python=%PYTHON_VERSION% matplotlib=2.0.2"
     
+build_script:
+
+  # Build the compiled extension
+  - ECHO "I don't actually build anything!"
