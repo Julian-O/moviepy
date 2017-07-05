@@ -60,11 +60,17 @@ if 'build_docs' in sys.argv:
 exec(open('moviepy/version.py').read()) # loads __version__
 
 # Define the requirements for specific execution needs.
-requires = ['decorator>=4.0.2,<=4.0.11', 'imageio==2.1.2', 'tqdm>=4.11.2,<=4.14.0', 'numpy']
-optional_reqs = []
-documentation_reqs = ['pygame==1.9.3', 'numpydoc>=0.6.0',
-    'sphinx_rtd_theme>=0.1.10b0', 'Sphinx>=1.5.2'] + optional_reqs
-test_reqs = ['pytest>=2.8.0', 'nose', 'sklearn', 'pytest-cov', 'coveralls'] \
+requires = ['decorator>=4.0.2,<5.0', 'imageio>=2.1.2,<3.0', 'tqdm>=4.11.2,<5.0', 'numpy']
+optional_reqs = [
+   "scipy>=0.19.0,<1.0; python_version != '3.3'",
+   "opencv-python>=0.19.0,<1.0; python_version != '3.3'",    
+   "scikit-learn; python_version >= '3.4'",    
+   "scikit-image>=0.13.0,<1.0; python_version >= '3.4'",    
+   "matplotlib>=2.0.0,<3.0; python_version >= '3.4'",
+]
+documentation_reqs = ['pygame>=1.9.3,<2.0', 'numpydoc>=0.6.0,<1.0',
+    'sphinx_rtd_theme>=0.1.10b0,<1.0', 'Sphinx>=1.5.2,<2.0'] + optional_reqs
+test_reqs = ['pytest>=2.8.0,<3.0', 'nose', 'sklearn', 'pytest-cov', 'coveralls'] \
     + optional_reqs
 
 # Load the README.
