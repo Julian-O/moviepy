@@ -72,7 +72,7 @@ optional_reqs_dictionary = { # Map from environment_marker to list of package & 
         "scipy>=0.19.0,<1.0",
         "opencv-python>=0.19.0,<1.0",
         ],
-    "python_version>='3.4': [
+    "python_version>='3.4'": [
         "scikit-image>=0.13.0,<1.0",
         "scikit-learn",
         "matplotlib>=2.0.0,<3.0",
