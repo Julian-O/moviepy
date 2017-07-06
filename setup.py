@@ -95,7 +95,7 @@ test_reqs = [
         'pytest-cov',
         'coveralls',
         ]
-test_reqs_dictionary = {None: test_reqs)
+test_reqs_dictionary = {None: test_reqs}
 test_reqs_dictionary.update(optional_reqs_dictionary)
 
 def expanded_reqs(key, reqs_dict):
