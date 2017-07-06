@@ -102,7 +102,7 @@ def expanded_reqs(key, reqs_dict):
     return {
         [(key if not environment_marker else key + ":" + environment_marker,
          requirements)
-        for environment_marker, requirements in reqs_dict]}
+        for environment_marker, requirements in reqs_dict.items()]}
         
 extra_reqs_dictionary = {}
 extra_reqs_dictionary.update(expanded_reqs("optional", optional_reqs_dictionary))
