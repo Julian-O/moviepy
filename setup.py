@@ -60,27 +60,55 @@ if 'build_docs' in sys.argv:
 exec(open('moviepy/version.py').read()) # loads __version__
 
 # Define the requirements for specific execution needs.
-requires = ['decorator>=4.0.2,<5.0', 'imageio>=2.1.2,<3.0', 'tqdm>=4.11.2,<5.0', 'numpy']
-optional_reqs = [
-   "scipy>=0.19.0,<1.0: python_version != '3.3'",
-   "opencv-python>=0.19.0,<1.0: python_version != '3.3'",    
-   "scikit-learn: python_version >= '3.4'",    
-   "scikit-image>=0.13.0,<1.0: python_version >= '3.4'",    
-   "matplotlib>=2.0.0,<3.0: python_version >= '3.4'",
-]
-documentation_reqs = [
-    'pygame>=1.9.3,<2.0', 
-    'numpydoc>=0.6.0,<1.0',
-    'sphinx_rtd_theme>=0.1.10b0,<1.0', 
-    'Sphinx>=1.5.2,<2.0'
-    ] + optional_reqs
+requires = [
+    'decorator>=4.0.2,<5.0',
+    'imageio>=2.1.2,<3.0',
+    'tqdm>=4.11.2,<5.0',
+    'numpy',
+    ]
+
+optional_reqs_dictionary = { # Map from environment_marker to list of package & versioning
+    "python_version!='3.3'": [
+        "scipy>=0.19.0,<1.0",
+        "opencv-python>=0.19.0,<1.0",
+        ]
+    "python_version>='3.4': [
+        "scikit-image>=0.13.0,<1.0",
+        "scikit-learn",
+        "matplotlib>=2.0.0,<3.0",
+    ]
+}
+
+doc_reqs_dictionary = { # Map from environment_marker to list of package & versioning
+    None: [
+        'pygame>=1.9.3,<2.0', 
+        'numpydoc>=0.6.0,<1.0',
+        'sphinx_rtd_theme>=0.1.10b0,<1.0', 
+        'Sphinx>=1.5.2,<2.0'
+    ]}
+doc_reqs_dictionary.update(optional_reqs_dictionary)        
+        
 test_reqs = [
-    'pytest>=2.8.0,<3.0',
-    'nose', 
-    'sklearn',
-    'pytest-cov',
-    'coveralls'
-    ] + optional_reqs
+        'pytest>=2.8.0,<3.0',
+        'nose', 
+        'sklearn',
+        'pytest-cov',
+        'coveralls'
+        ]
+test_reqs_dictionary = {None: test_reqs)
+test_reqs_dictionary.update(optional_reqs_dictionary)
+
+def expanded_reqs(key, reqs_dict):
+    return {
+        (key if not environment_marker else key + ":" + environment_marker,
+         requirements)
+        for environment_marker, requirements in reqs_dict)
+        
+extra_reqs_dictionary = {}
+extra_reqs_dictionary.update(expanded_reqs("optional", optional_reqs_dictionary))
+extra_reqs_dictionary.update(expanded_reqs("doc", doc_reqs_dictionary))
+extra_reqs_dictionary.update(expanded_reqs("test", test_reqs_dictionary))
+print(extra_reqs_dictionary)
 
 # Load the README.
 with open('README.rst', 'r', 'utf-8') as f:
@@ -124,8 +152,5 @@ setup(
             'release': ('setup.py', __version__)}},
     tests_require=test_reqs,
     install_requires=requires,
-    extras_require={
-        'optional': optional_reqs,
-        'docs': documentation_reqs,
-        'test': test_reqs}
+    extras_require=extra_reqs_dictionary,
 )
