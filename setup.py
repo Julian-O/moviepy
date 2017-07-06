@@ -71,12 +71,12 @@ optional_reqs_dictionary = { # Map from environment_marker to list of package & 
     "python_version!='3.3'": [
         "scipy>=0.19.0,<1.0",
         "opencv-python>=0.19.0,<1.0",
-        ]
+        ],
     "python_version>='3.4': [
         "scikit-image>=0.13.0,<1.0",
         "scikit-learn",
         "matplotlib>=2.0.0,<3.0",
-    ]
+        ],
 }
 
 doc_reqs_dictionary = { # Map from environment_marker to list of package & versioning
@@ -84,7 +84,7 @@ doc_reqs_dictionary = { # Map from environment_marker to list of package & versi
         'pygame>=1.9.3,<2.0', 
         'numpydoc>=0.6.0,<1.0',
         'sphinx_rtd_theme>=0.1.10b0,<1.0', 
-        'Sphinx>=1.5.2,<2.0'
+        'Sphinx>=1.5.2,<2.0',
     ]}
 doc_reqs_dictionary.update(optional_reqs_dictionary)        
         
@@ -93,7 +93,7 @@ test_reqs = [
         'nose', 
         'sklearn',
         'pytest-cov',
-        'coveralls'
+        'coveralls',
         ]
 test_reqs_dictionary = {None: test_reqs)
 test_reqs_dictionary.update(optional_reqs_dictionary)
