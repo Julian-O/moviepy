@@ -55,13 +55,13 @@ environment:
       PYTHON_VERSION: "2.7.13"
       PYTHON_ARCH: "32"
       MINICONDA: C:\Miniconda
-      CONDA_INSTALL: "matplotlib scikit-learn scipy opencv-python numpy tqdm>=4.11.2,,<=5.0"
+      CONDA_INSTALL: "matplotlib scikit-learn scipy opencv-python numpy tqdm>=4.11.2,<=5.0"
 
     - PYTHON: "C:\\Python34-x64"
       PYTHON_VERSION: "3.6.1"
       PYTHON_ARCH: "32"
       MINICONDA: C:\Miniconda36
-      CONDA_INSTALL: "matplotlib scikit-learn scipy numpy tqdm>=4.11.2,,<=5.0"
+      CONDA_INSTALL: "matplotlib scikit-learn scipy numpy tqdm>=4.11.2,<=5.0"
 
 install:
   # If there is a newer build queued for the same PR, cancel this one.
@@ -129,8 +129,6 @@ install:
   - conda install -n root _license
   - conda info -a
 
-  - conda create -q -n test-environment python=%PYTHON_VERSION% scipy numpy tqdm>=4.11.2,<=5.0
-
 build_script:
 
   # # Dump a list of required files.
@@ -138,9 +136,8 @@ build_script:
   # - TYPE moviepy.egg-info\\requires.txt
   
   # Let Miniconda  install them because PIP finds some packages challenging.
-  # - ECHO Asking Conda to install %CONDA_INSTALL%
   # - "conda create -q -n test-environment python=%PYTHON_VERSION% --file moviepy.egg-info/requires.txt"
-  # - "conda create -q -n test-environment python=%PYTHON_VERSION% %CONDA_INSTALL%"
+  - conda create -q -n test-environment python=%PYTHON_VERSION% "%CONDA_INSTALL%"
 
 
   - activate test-environment
