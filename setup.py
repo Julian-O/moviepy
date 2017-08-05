@@ -67,48 +67,38 @@ requires = [
     'numpy',
     ]
 
-optional_reqs_dictionary = { # Map from environment_marker to list of package & versioning
-    "python_version!='3.3'": [
-        "scipy>=0.19.0,<1.0",
-        "opencv-python>=0.19.0,<1.0",
-        ],
-    "python_version>='3.4'": [
-        "scikit-image>=0.13.0,<1.0",
-        "scikit-learn",
-        "matplotlib>=2.0.0,<3.0",
-        ],
-}
+# TODO: We have a problem here. What we need to install apparently depends on the Python version.
+# But using environment markers still seems to be problematic in setup.py.
+# The Linux tests simply don't use set-up, but instead hard-code the rules in the Travis.yaml file.
+# i.e. failing DRY.
+optional_reqs = [
+        "scipy>=0.19.0,<1.0; python_version!='3.3'",
+        "opencv-python>=0.19.0,<1.0; python_version!='3.3'",
+        "scikit-image>=0.13.0,<1.0; python_version>='3.4'",
+        "scikit-learn; python_version>='3.4'",
+        "matplotlib>=2.0.0,<3.0; python_version>='3.4'",
+        ]
 
-doc_reqs_dictionary = { # Map from environment_marker to list of package & versioning
-    None: [
+doc_reqs = [
         'pygame>=1.9.3,<2.0', 
         'numpydoc>=0.6.0,<1.0',
         'sphinx_rtd_theme>=0.1.10b0,<1.0', 
         'Sphinx>=1.5.2,<2.0',
-    ]}
-doc_reqs_dictionary.update(optional_reqs_dictionary)        
-        
+    ] + optional_reqs
+
 test_reqs = [
         'pytest>=2.8.0,<3.0',
         'nose', 
         'sklearn',
         'pytest-cov',
         'coveralls',
-        ]
-test_reqs_dictionary = {None: test_reqs}
-test_reqs_dictionary.update(optional_reqs_dictionary)
+        ] + optional_reqs
 
-def expanded_reqs(key, reqs_dict):
-    return dict(
-        [(key if not environment_marker else key + ":" + environment_marker,
-         requirements)
-        for environment_marker, requirements in reqs_dict.items()])
-        
-extra_reqs_dictionary = {}
-extra_reqs_dictionary.update(expanded_reqs("optional", optional_reqs_dictionary))
-extra_reqs_dictionary.update(expanded_reqs("doc", doc_reqs_dictionary))
-extra_reqs_dictionary.update(expanded_reqs("test", test_reqs_dictionary))
-print(extra_reqs_dictionary)
+extra_reqs = {
+    "optional": optional_reqs
+    "doc": doc_reqs,
+    "test": test_reqs
+}
 
 # Load the README.
 with open('README.rst', 'r', 'utf-8') as f:
@@ -152,5 +142,5 @@ setup(
             'release': ('setup.py', __version__)}},
     tests_require=test_reqs,
     install_requires=requires,
-    extras_require=extra_reqs_dictionary,
+    extras_require=extra_reqs,
 )
