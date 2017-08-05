@@ -21,11 +21,11 @@ before_install:
   - python -c "import setuptools; print('SetupTools version = %s' % setuptools.__version__)"
 
 install:
-  # Some packages in the have heinous cross-dependencies, and won't install correctly. Force the order of installation.
-  - if [[ $TRAVIS_PYTHON_VERSION == '3.4' || $TRAVIS_PYTHON_VERSION == '3.5' || $TRAVIS_PYTHON_VERSION == '3.6' ]]; then pip install matplotlib; fi
-  # - if [[ $TRAVIS_PYTHON_VERSION == '2.7' || $TRAVIS_PYTHON_VERSION == '3.4' || $TRAVIS_PYTHON_VERSION == '3.5' || $TRAVIS_PYTHON_VERSION == '3.6' ]]; then pip install scipy opencv-python; fi
+  # Some packages have heinous cross-dependencies, and won't install correctly. Force the order of installation.
+  # - if [[ $TRAVIS_PYTHON_VERSION == '3.4' || $TRAVIS_PYTHON_VERSION == '3.5' || $TRAVIS_PYTHON_VERSION == '3.6' ]]; then pip install matplotlib; fi
   - python setup.py install
   - python setup.py test
+  - pip freeze
 
 before_script:
   - py.test tests/ --cov
