@@ -57,6 +57,7 @@ if 'build_docs' in sys.argv:
 
     cmdclass['build_docs'] = BuildDoc
 
+__version__ = None # Explicitly set version to quieten static code checkers.
 exec(open('moviepy/version.py').read()) # loads __version__
 
 # Define the requirements for specific execution needs.
@@ -95,7 +96,7 @@ test_reqs = [
         ] + optional_reqs
 
 extra_reqs = {
-    "optional": optional_reqs
+    "optional": optional_reqs,
     "doc": doc_reqs,
     "test": test_reqs
 }
