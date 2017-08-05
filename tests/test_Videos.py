@@ -10,7 +10,7 @@ from moviepy.video.VideoClip import ColorClip, ImageClip
 import download_media
 
 sys.path.append("tests")
-
+from test_helper import TMP_DIR
 
 def test_download_media(capsys):
     with capsys.disabled():
@@ -25,7 +25,7 @@ def test_afterimage():
             with CompositeVideoClip([some_background_clip, masked_clip],
                                             use_bgclip=True) as final_clip:
                 final_clip.duration = 5
-                final_clip.write_videofile("/tmp/afterimage.mp4", fps=30)
+                final_clip.write_videofile(os.path.join(TMP_DIR, "afterimage.mp4"), fps=30)
 
 if __name__ == '__main__':
    pytest.main()
