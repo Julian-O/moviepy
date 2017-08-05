@@ -68,10 +68,6 @@ requires = [
     'numpy',
     ]
 
-# TODO: We have a problem here. What we need to install apparently depends on the Python version.
-# But using environment markers still seems to be problematic in setup.py.
-# The Linux tests simply don't use set-up, but instead hard-code the rules in the Travis.yaml file.
-# i.e. failing DRY.
 optional_reqs = [
         "opencv-python>=3.0,<4.0; python_version!='2.7'",
         "scikit-image>=0.13.0,<1.0; python_version>='3.4'",
@@ -143,5 +139,4 @@ setup(
     tests_require=test_reqs,
     install_requires=requires,
     extras_require=extra_reqs,
-    test_suite=tests
 )
