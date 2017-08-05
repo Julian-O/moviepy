@@ -16,7 +16,7 @@ before_install:
   - mkdir media
 install:
   - python setup.py install
-  - python setup.py tests
+  - python setup.py test
 
 before_script:
   - py.test tests/ --cov
