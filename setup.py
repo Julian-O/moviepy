@@ -143,4 +143,5 @@ setup(
     tests_require=test_reqs,
     install_requires=requires,
     extras_require=extra_reqs,
+    test_suite=tests
 )
