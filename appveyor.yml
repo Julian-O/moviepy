@@ -126,12 +126,13 @@ install:
     
 build_script:
 
-  # Dump a list of required files.
-  - "%CMD_IN_ENV% python c:\\projects\\moviepy\\setup.py egg_info"
-  - TYPE moviepy.egg-info\\requires.txt
+  # # Dump a list of required files.
+  # - "%CMD_IN_ENV% python c:\\projects\\moviepy\\setup.py egg_info"
+  # - TYPE moviepy.egg-info\\requires.txt
   
   # Let Miniconda  install them because PIP finds some packages challenging.
-  - "conda create -q -n test-environment python=%PYTHON_VERSION% --file moviepy.egg-info/requires.txt"
+  # - "conda create -q -n test-environment python=%PYTHON_VERSION% --file moviepy.egg-info/requires.txt"
+  - "conda create -q -n test-environment python=%PYTHON_VERSION% %CONDA_INSTALL%"
   - activate test-environment
   
   # Build the compiled extension
