@@ -43,7 +43,7 @@ environment:
       PYTHON_VERSION: "3.5.3"
       PYTHON_ARCH: "64"
       MINICONDA: C:\Miniconda35-x64
-      CONDA_INSTALL: "matplotlib scikit-learn scipy opencv-python numpy tqdm>=4.11.2,<=5.0"
+      CONDA_INSTALL: "matplotlib scikit-learn scipy opencv-python numpy tqdm"
 
     - PYTHON: "C:\\Python36-x64"
       PYTHON_VERSION: "3.6.1"
