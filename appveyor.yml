@@ -25,13 +25,13 @@ environment:
       PYTHON_VERSION: "2.7.13"
       PYTHON_ARCH: "64"
       MINICONDA: C:\Miniconda
-      CONDA_INSTALL: "scipy numpy tqdm>=4.11.2,<=5.0"
+      CONDA_INSTALL: "scipy numpy tqdm"
       
     - PYTHON: "C:\\Python33-x64"
       PYTHON_VERSION: "3.3.5"
       PYTHON_ARCH: "64"
       MINICONDA: C:\Miniconda3-x64
-      CONDA_INSTALL: "numpy tqdm>=4.11.2,<=5.0"
+      CONDA_INSTALL: "numpy tqdm"
 
     - PYTHON: "C:\\Python34-x64"
       PYTHON_VERSION: "3.4.4"
