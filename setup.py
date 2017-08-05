@@ -90,9 +90,9 @@ doc_reqs = [
 test_reqs = [
         'pytest>=2.8.0,<4.0',
         'nose', 
-        'sklearn',
         'pytest-cov',
         'coveralls',
+        "scikit-learn; python_version>='3.4'",
         ]
 
 extra_reqs = {
