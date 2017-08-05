@@ -23,7 +23,7 @@ before_install:
 install:
   # Some packages in the have heinous cross-dependencies, and won't install correctly. Force the order of installation.
   - if [[ $TRAVIS_PYTHON_VERSION == '3.4' || $TRAVIS_PYTHON_VERSION == '3.5' || $TRAVIS_PYTHON_VERSION == '3.6' ]]; then pip install matplotlib; fi
-  - python setup.py install[tests]
+  - python setup.py tests
 
 before_script:
   - py.test tests/ --cov
