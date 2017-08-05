@@ -37,25 +37,25 @@ environment:
       PYTHON_VERSION: "3.4.4"
       PYTHON_ARCH: "64"
       MINICONDA: C:\Miniconda3-x64
-      CONDA_INSTALL: "matplotlib scikit-learn scipy opencv numpy tqdm"
+      CONDA_INSTALL: "matplotlib scikit-learn scipy numpy tqdm --channel https://conda.anaconda.org/menpo opencv3"
 
     - PYTHON: "C:\\Python35-x64"
       PYTHON_VERSION: "3.5.3"
       PYTHON_ARCH: "64"
       MINICONDA: C:\Miniconda35-x64
-      CONDA_INSTALL: "matplotlib scikit-learn scipy opencv numpy tqdm"
+      CONDA_INSTALL: "matplotlib scikit-learn scipy numpy tqdm --channel https://conda.anaconda.org/menpo opencv3"
 
     - PYTHON: "C:\\Python36-x64"
       PYTHON_VERSION: "3.6.1"
       PYTHON_ARCH: "64"
       MINICONDA: C:\Miniconda36-x64
-      CONDA_INSTALL: "matplotlib scikit-learn scipy opencv numpy tqdm"
+      CONDA_INSTALL: "matplotlib scikit-learn scipy numpy tqdm --channel https://conda.anaconda.org/menpo opencv3"
 
     - PYTHON: "C:\\Python27"
       PYTHON_VERSION: "2.7.13"
       PYTHON_ARCH: "32"
       MINICONDA: C:\Miniconda
-      CONDA_INSTALL: "matplotlib scikit-learn scipy opencv numpy tqdm"
+      CONDA_INSTALL: "matplotlib scikit-learn scipy numpy tqdm --channel https://conda.anaconda.org/menpo opencv3"
 
     - PYTHON: "C:\\Python34-x64"
       PYTHON_VERSION: "3.6.1"
