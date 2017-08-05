@@ -132,7 +132,7 @@ build_script:
   # - TYPE moviepy.egg-info\\requires.txt
   
   # Let Miniconda  install them because PIP finds some packages challenging.
-  - "ECHO Asking Conda to install %CONDA_INSTALL%"
+  - ECHO Asking Conda to install %CONDA_INSTALL%
   # - "conda create -q -n test-environment python=%PYTHON_VERSION% --file moviepy.egg-info/requires.txt"
   - "conda create -q -n test-environment python=%PYTHON_VERSION% %CONDA_INSTALL%"
   - activate test-environment
