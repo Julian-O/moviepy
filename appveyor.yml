@@ -85,6 +85,10 @@ install:
   # - ps: "ls \"C:\\projects\""
   # - ps: "ls \"C:\\projects\\moviepy\""
   
+  - ECHO "Environment Variables"
+  - set
+  # - ps: "ls \"C:\\projects\\moviepy\""
+
   # Installing ImageMagick (which also installs ffmpeg)
   - "ECHO Downloading ImageMagick"
     # Versions >=7.0 have problems - executables changed names.
