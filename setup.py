@@ -85,7 +85,7 @@ doc_reqs = [
         'numpydoc>=0.6.0,<1.0',
         'sphinx_rtd_theme>=0.1.10b0,<1.0', 
         'Sphinx>=1.5.2,<2.0',
-    ] + optional_reqs
+    ]
 
 test_reqs = [
         'pytest>=2.8.0,<4.0',
@@ -93,7 +93,7 @@ test_reqs = [
         'sklearn',
         'pytest-cov',
         'coveralls',
-        ] + optional_reqs
+        ]
 
 extra_reqs = {
     "optional": optional_reqs,
