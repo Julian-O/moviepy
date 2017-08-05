@@ -92,7 +92,6 @@ test_reqs = [
         'nose', 
         'pytest-cov',
         'coveralls',
-        "scikit-learn; python_version>='3.4'",
         ]
 
 extra_reqs = {
