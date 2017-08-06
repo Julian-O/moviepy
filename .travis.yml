@@ -23,14 +23,13 @@ before_install:
 install:
   # Some packages have heinous cross-dependencies, and won't install correctly. Force the order of installation.
   # - if [[ $TRAVIS_PYTHON_VERSION == '3.4' || $TRAVIS_PYTHON_VERSION == '3.5' || $TRAVIS_PYTHON_VERSION == '3.6' ]]; then pip install matplotlib; fi
-  - python setup.py install
-  - python setup.py --verbose test
-  - pip freeze
+  # - python setup.py install
 
 before_script:
   - py.test tests/ --cov
 
-script: py.test tests/ --doctest-modules -v --cov moviepy --cov-report term-missing
+script:
+  - python setup.py --verbose test --pytest-args "--doctest-modules -v --cov moviepy --cov-report term-missing"
 
 after_success:
   - coveralls
