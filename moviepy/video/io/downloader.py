@@ -29,6 +29,6 @@ def download_webfile(url, filename, overwrite=False):
         except OSError as e:
             raise OSError(e.message + '\n A possible reason is that youtube-dl'
                 ' is not installed on your computer. Install it with '
-                ' "pip install youtube-dl"')
+                ' "pip install youtube_dl"')
 
 
