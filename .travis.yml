@@ -26,7 +26,7 @@ install:
   # - python setup.py install
 
 before_script:
-  - py.test tests/ --cov
+
 
 script:
   - python setup.py --verbose test --pytest-args "--doctest-modules -v --cov moviepy --cov-report term-missing"
