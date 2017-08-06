@@ -74,6 +74,7 @@ optional_reqs = [
         "scikit-learn; python_version>='3.4'",
         "scipy>=0.19.0,<1.0; python_version!='3.3'",
         "matplotlib>=2.0.0,<3.0; python_version>='3.4'",
+        "youtube-dl"
         ]
 
 doc_reqs = [
