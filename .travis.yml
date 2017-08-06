@@ -15,22 +15,17 @@ before_install:
   - sudo apt-get install -y -qq ffmpeg
   - mkdir media
 
-  # Ensure PIP and SetupTools are up-to-date.
+  # Ensure PIP is up-to-date to avoid warnings.
   - python -m pip install --upgrade pip
+  # Ensure setuptools is up-to-date to avoid environment_markers bug.
   - pip install --upgrade setuptools
-  - python -c "import setuptools; print('SetupTools version = %s' % setuptools.__version__)"
+  # The default py that is installed is too old on some platforms, leading to version conflicts
+  - pip install --upgrade py
 
 install:
-  # Some packages have heinous cross-dependencies, and won't install correctly. Force the order of installation.
-  # - if [[ $TRAVIS_PYTHON_VERSION == '3.4' || $TRAVIS_PYTHON_VERSION == '3.5' || $TRAVIS_PYTHON_VERSION == '3.6' ]]; then pip install matplotlib; fi
-  # - python setup.py install
-  - echo "No install action required"
-  - pip freeze
-  - pip install -U py
-  - pip freeze
+  - echo "No install action required. Implicitly performed by the testing."
 
-before_script:
-
+# before_script:
 
 script:
   - python setup.py --verbose test --pytest-args "tests/ --doctest-modules -v --cov moviepy --cov-report term-missing"
