@@ -8,9 +8,9 @@ from moviepy.video.io.downloader import download_webfile
 def download_url(url, filename):
     """Download a file."""
     if not os.path.exists(filename):
-       print('Downloading {} ...'.format(filename))
-       download_webfile(url, filename)
-       print('Downloading complete.')
+        print('Downloading {} ...'.format(filename))
+        download_webfile(url, filename)
+        print('Downloading complete.')
 
 def download_youtube_video(youtube_id, filename):
     """Download a video from youtube."""
