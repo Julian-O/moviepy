@@ -42,7 +42,7 @@ class PyTest(TestCommand):
             raise ImportError('Running tests requires additional dependencies.'
                 '\nPlease run (pip install moviepy[test])')
 
-        errno = pytest.main(self.pytest_args)
+        errno = pytest.main(self.pytest_args.split(" "))
         sys.exit(errno)
 
 
