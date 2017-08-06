@@ -29,7 +29,7 @@ before_script:
 
 
 script:
-  - python setup.py --verbose test --pytest-args "--doctest-modules -v --cov moviepy --cov-report term-missing"
+  - python setup.py --verbose test --pytest-args "tests/ --doctest-modules -v --cov moviepy --cov-report term-missing"
 
 after_success:
   - coveralls
