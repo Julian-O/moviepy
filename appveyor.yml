@@ -31,7 +31,8 @@ environment:
       PYTHON_VERSION: "3.3.5"
       PYTHON_ARCH: "64"
       MINICONDA: C:\Miniconda3-x64
-      CONDA_INSTALL: "numpy setuptools\\>=36.2"
+      # Would rather say >=36.2.7, but having problems with syntax.
+      CONDA_INSTALL: "numpy setuptools=36.2.7"
 
     - PYTHON: "C:\\Python34-x64"
       PYTHON_VERSION: "3.4.4"
@@ -109,8 +110,6 @@ install:
   - "set PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q conda
-  # Avoid SSL: CERTIFICATE_VERIFY_FAILED error when downloading media.
-  - conda update openssl cryptography
   # Avoid warning from conda info.
   - conda install -n root _license
   # Dump the setup for debugging.
