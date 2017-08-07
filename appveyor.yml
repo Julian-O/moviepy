@@ -117,7 +117,12 @@ install:
   - "set PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q conda
+  # Avoid SSL: CERTIFICATE_VERIFY_FAILED error when downloading media.
+  - conda update openssl cryptography
+  - conda update certifi
+  # Avoid warning from conda info.
   - conda install -n root _license
+  # Dump the setup for debugging.
   - conda info -a
 
 build_script:
