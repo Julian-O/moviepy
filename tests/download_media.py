@@ -38,10 +38,9 @@ def download():
         download_url('{}/{}'.format(github_prefix, url), output.format(tail))
 
     # Download remaining asset.
-    # Using http because https was being rejected as having a bad certificate (by AppVeyor machines), even though it
-    # looks good.
-    download_url('http://data.vision.ee.ethz.ch/cvl/video2gif/kAKZeIzs0Ag.mp4',
-                 'media/video_with_failing_audio.mp4')
+    # TO DO: Restore
+    # download_url('https://data.vision.ee.ethz.ch/cvl/video2gif/kAKZeIzs0Ag.mp4',
+    #             'media/video_with_failing_audio.mp4')
 
 if __name__ == "__main__":
     download()
