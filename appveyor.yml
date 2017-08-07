@@ -31,7 +31,7 @@ environment:
       PYTHON_VERSION: "3.3.5"
       PYTHON_ARCH: "64"
       MINICONDA: C:\Miniconda3-x64
-      CONDA_INSTALL: "numpy"
+      CONDA_INSTALL: "numpy setuptools>=36.2"
 
     - PYTHON: "C:\\Python34-x64"
       PYTHON_VERSION: "3.4.4"
@@ -128,9 +128,6 @@ install:
   # Upgrade to the latest version of pip to avoid it displaying warnings
   # about it being out of date.
   - pip install --disable-pip-version-check --user --upgrade pip
-
-  # Conda sometimes selects an old version - that doesn't handle environment markers.
-  - conda install setuptools>=36.2
 
 build_script:
 
