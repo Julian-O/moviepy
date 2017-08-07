@@ -29,11 +29,13 @@ install:
 
 script:
   - python setup.py test --pytest-args "tests/ --doctest-modules -v --cov moviepy --cov-report term-missing"
-  # Now the *code* is tested, let's check that the setup runs without falling over.
-  - python setup.py install
-  - python setup.py install docs
-  - python setup.py install test
-  - python setup.py install optional
+  # Now the *code* is tested, let's check that the setup is compatible with PIP without falling over.
+  - pip install -e .
+  - pip install -e .[docs]
+  - pip install -e .[optional]
+  - pip install -e .[tests]
+
+
 
 after_success:
   - coveralls
