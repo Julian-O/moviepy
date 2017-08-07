@@ -109,11 +109,6 @@ install:
   - "python --version"
   - "python -c \"import struct; print(struct.calcsize('P') * 8)\""
   - "ECHO %PYTHON_VERSION% %MINICONDA%"
-  
-  # Upgrade to the latest version of pip to avoid it displaying warnings
-  # about it being out of date.
-  - pip install --disable-pip-version-check --user --upgrade pip
-  - pip install --upgrade setuptools
 
   # Prepare Miniconda.
   - "set PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
@@ -125,6 +120,13 @@ install:
   - conda install -n root _license
   # Dump the setup for debugging.
   - conda info -a
+
+  # Upgrade to the latest version of pip to avoid it displaying warnings
+  # about it being out of date.
+  - pip install --disable-pip-version-check --user --upgrade pip
+
+  # Conda sometimes selects an old version - that doesn't handle environment markers.
+  - pip install --upgrade setuptools
 
 build_script:
 
