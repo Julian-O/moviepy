@@ -32,7 +32,7 @@ environment:
       PYTHON_ARCH: "64"
       MINICONDA: C:\Miniconda3-x64
       # Would rather say >=36.2.7, but having problems with syntax.
-      CONDA_INSTALL: "numpy setuptools=36.2.7"
+      CONDA_INSTALL: "numpy" #  setuptools=36.2.7
 
     - PYTHON: "C:\\Python34-x64"
       PYTHON_VERSION: "3.4.4"
@@ -122,6 +122,7 @@ install:
   # Upgrade to the latest version of pip to avoid it displaying warnings
   # about it being out of date.
   - pip install --disable-pip-version-check --user --upgrade pip
+  - pip install --upgrade setuptools
 
 build_script:
 
