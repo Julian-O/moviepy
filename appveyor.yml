@@ -133,9 +133,9 @@ install:
   - pip install --user --upgrade setuptools
 
   - ps: "ls \"C:\\projects\\moviepy\""
-  - ps: "ls \"C:\\Miniconda\\pkgs\\ffmpeg-3.2.4-1\info\""
-  - ps: "ls \"C:\\Miniconda\\pkgs\\ffmpeg-3.2.4-1\library\""
-  - ps: "ls \"C:\\Miniconda\\envs\\test-environment\tools\""
+  - ps: "ls \"C:\\Miniconda\\pkgs\\ffmpeg-3.2.4-1\\info\""
+  - ps: "ls \"C:\\Miniconda\\pkgs\\ffmpeg-3.2.4-1\\library\""
+  - ps: "ls \"C:\\Miniconda\\envs\\test-environment\\tools\""
 
 
 build_script:
