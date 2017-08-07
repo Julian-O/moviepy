@@ -20,7 +20,7 @@ before_install:
   # Ensure setuptools is up-to-date to avoid environment_markers bug.
   - pip install --upgrade setuptools
   # The default py that is installed is too old on some platforms, leading to version conflicts
-  - pip install --upgrade py
+  - pip install --upgrade py pytest
 
 install:
   - echo "No install action required. Implicitly performed by the testing."
