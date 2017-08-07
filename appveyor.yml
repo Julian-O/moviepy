@@ -88,6 +88,18 @@ install:
   # - ECHO "Environment Variables"
   # - set
 
+  # Installing ImageMagick (which also installs ffmpeg)
+  - "ECHO Downloading ImageMagick"
+    # Versions >=7.0 have problems - executables changed names.
+    # Assume 64-bit. Need to change to x86 for 32-bit.
+    # The available version at this site changes - each time it needs to be corrected in four places
+    # in the next few lines.
+  - curl -fskLO ftp://ftp.fifi.org/pub/ImageMagick/binaries/ImageMagick-6.9.9-5-Q16-x64-static.exe
+  - "ECHO Installing ImageMagick"
+  - "ImageMagick-6.9.9-5-Q16-x64-static.exe /verySILENT /SP"
+  - set IMAGEMAGICK_BINARY=c:\\Program Files\\ImageMagick-6.9.9-Q16\\convert.exe
+  - set FFMPEG_BINARY=c:\\Program Files\\ImageMagick-6.9.9-Q16\\ffmpeg.exe
+
   # Check that we have the expected version and architecture for Python
   - "python --version"
   - "python -c \"import struct; print(struct.calcsize('P') * 8)\""
