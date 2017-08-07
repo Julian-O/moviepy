@@ -31,8 +31,7 @@ environment:
       PYTHON_VERSION: "3.3.5"
       PYTHON_ARCH: "64"
       MINICONDA: C:\Miniconda3-x64
-      # Would rather say >=36.2.7, but having problems with syntax.
-      CONDA_INSTALL: "numpy ffmpeg" #  setuptools=36.2.7
+      CONDA_INSTALL: "numpy ffmpeg"
 
     - PYTHON: "C:\\Python34-x64"
       PYTHON_VERSION: "3.4.4"
@@ -134,10 +133,9 @@ install:
   - pip install --user --upgrade setuptools
 
   - ps: "ls \"C:\\projects\\moviepy\""
-  - ps: "ls \"C:\\Miniconda\\pkgs\\ffmpeg-3.2.4-1\""
-  - ps: "ls \"C:\\Miniconda\\envs\\test-environment\""
-  - ps: "ls \"C:\\Miniconda\\envs\\test-environment\\ffmpeg-3.2.4-1\""
-
+  - ps: "ls \"C:\\Miniconda\\pkgs\\ffmpeg-3.2.4-1\info\""
+  - ps: "ls \"C:\\Miniconda\\pkgs\\ffmpeg-3.2.4-1\library\""
+  - ps: "ls \"C:\\Miniconda\\envs\\test-environment\tools\""
 
 
 build_script:
