@@ -114,9 +114,11 @@ install:
   # Prepare Miniconda.
   - "set PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
   - conda config --set always_yes yes --set changeps1 no
+  - conda update -q conda
+
   # To find ffmpeg, provide a channel.
   - conda config --append channels conda-forge
-  - conda update -q conda
+
   # Avoid warning from conda info.
   - conda install -n root _license
   # Dump the setup for debugging.
