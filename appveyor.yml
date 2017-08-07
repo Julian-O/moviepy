@@ -101,6 +101,11 @@ install:
 #  - set IMAGEMAGICK_BINARY=c:\\Program Files\\ImageMagick-6.9.9-Q16\\convert.exe
 #  - set FFMPEG_BINARY=c:\\Program Files\\ImageMagick-6.9.9-Q16\\ffmpeg.exe
 
+  # Prepend desired Python to the PATH of this build (this cannot be
+  # done from inside the powershell script as it would require to restart
+  # the parent CMD process).
+  - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
+
   # Check that we have the expected version and architecture for Python
   - "python --version"
   - "python -c \"import struct; print(struct.calcsize('P') * 8)\""
