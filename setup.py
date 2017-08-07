@@ -21,12 +21,12 @@ except ImportError:
 class PyTest(TestCommand):
     """Handle test execution from setup."""
 
-    user_options = [('pytest-args=', 'a', "Arguments to pass into py.test")]
+    user_options = [('pytest-args=', 'a', "Arguments to pass into pytest")]
 
     def initialize_options(self):
         """Initialize the PyTest options."""
         TestCommand.initialize_options(self)
-        self.pytest_args = []
+        self.pytest_args = ""
 
     def finalize_options(self):
         """Finalize the PyTest options."""
