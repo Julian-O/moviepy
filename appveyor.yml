@@ -125,7 +125,7 @@ install:
   - conda info -a
 
   # PIP finds some packages challenging. Let Miniconda install them.
-  - conda create -q -n test-environment python=%PYTHON_VERSION% %CONDA_INSTALL%
+  - conda create --verbose -q -n test-environment python=%PYTHON_VERSION% %CONDA_INSTALL%
   - activate test-environment
 
   # Upgrade to the latest version of pip to avoid it displaying warnings
