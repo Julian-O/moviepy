@@ -28,7 +28,12 @@ install:
 # before_script:
 
 script:
-  - python setup.py --verbose test --pytest-args "tests/ --doctest-modules -v --cov moviepy --cov-report term-missing"
+  - python setup.py test --pytest-args "tests/ --doctest-modules -v --cov moviepy --cov-report term-missing"
+  # Now the *code* is tested, let's check that the setup runs without falling over.
+  - python setup.py install
+  - python setup.py install docs
+  - python setup.py install test
+  - python setup.py install optional
 
 after_success:
   - coveralls
