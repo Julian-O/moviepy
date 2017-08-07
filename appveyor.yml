@@ -25,44 +25,44 @@ environment:
       PYTHON_VERSION: "2.7.13"
       PYTHON_ARCH: "64"
       MINICONDA: C:\Miniconda
-      CONDA_INSTALL: "numpy"
+      CONDA_INSTALL: "numpy -c menpo ffmpeg"
       
     - PYTHON: "C:\\Python33-x64"
       PYTHON_VERSION: "3.3.5"
       PYTHON_ARCH: "64"
       MINICONDA: C:\Miniconda3-x64
       # Would rather say >=36.2.7, but having problems with syntax.
-      CONDA_INSTALL: "numpy" #  setuptools=36.2.7
+      CONDA_INSTALL: "numpy -c menpo ffmpeg" #  setuptools=36.2.7
 
     - PYTHON: "C:\\Python34-x64"
       PYTHON_VERSION: "3.4.4"
       PYTHON_ARCH: "64"
       MINICONDA: C:\Miniconda3-x64
-      CONDA_INSTALL: "numpy"
+      CONDA_INSTALL: "numpy -c menpo ffmpeg"
 
     - PYTHON: "C:\\Python35-x64"
       PYTHON_VERSION: "3.5.3"
       PYTHON_ARCH: "64"
       MINICONDA: C:\Miniconda35-x64
-      CONDA_INSTALL: "numpy"
+      CONDA_INSTALL: "numpy -c menpo ffmpeg"
 
     - PYTHON: "C:\\Python36-x64"
       PYTHON_VERSION: "3.6.1"
       PYTHON_ARCH: "64"
       MINICONDA: C:\Miniconda36-x64
-      CONDA_INSTALL: "numpy"
+      CONDA_INSTALL: "numpy -c menpo ffmpeg"
 
     - PYTHON: "C:\\Python27"
       PYTHON_VERSION: "2.7.13"
       PYTHON_ARCH: "32"
       MINICONDA: C:\Miniconda
-      CONDA_INSTALL: "numpy"
+      CONDA_INSTALL: "numpy -c menpo ffmpeg"
 
     - PYTHON: "C:\\Python34"
       PYTHON_VERSION: "3.6.1"
       PYTHON_ARCH: "32"
       MINICONDA: C:\Miniconda36
-      CONDA_INSTALL: "numpy"
+      CONDA_INSTALL: "numpy -c menpo ffmpeg"
 
 install:
   # If there is a newer build queued for the same PR, cancel this one.
@@ -89,17 +89,17 @@ install:
   # - ECHO "Environment Variables"
   # - set
 
-  # Installing ImageMagick (which also installs ffmpeg)
-  - "ECHO Downloading ImageMagick"
-    # Versions >=7.0 have problems - executables changed names.
-    # Assume 64-bit. Need to change to x86 for 32-bit.
-    # The available version at this site changes - each time it needs to be corrected in four places
-    # in the next few lines.
-  - curl -fskLO ftp://ftp.fifi.org/pub/ImageMagick/binaries/ImageMagick-6.9.9-5-Q16-x64-static.exe
-  - "ECHO Installing ImageMagick"
-  - "ImageMagick-6.9.9-5-Q16-x64-static.exe /verySILENT /SP"
-  - set IMAGEMAGICK_BINARY=c:\\Program Files\\ImageMagick-6.9.9-Q16\\convert.exe
-  - set FFMPEG_BINARY=c:\\Program Files\\ImageMagick-6.9.9-Q16\\ffmpeg.exe
+#  # Installing ImageMagick (which also installs ffmpeg)
+#  - "ECHO Downloading ImageMagick"
+#    # Versions >=7.0 have problems - executables changed names.
+#    # Assume 64-bit. Need to change to x86 for 32-bit.
+#    # The available version at this site changes - each time it needs to be corrected in four places
+#    # in the next few lines.
+#  - curl -fskLO ftp://ftp.fifi.org/pub/ImageMagick/binaries/ImageMagick-6.9.9-5-Q16-x64-static.exe
+#  - "ECHO Installing ImageMagick"
+#  - "ImageMagick-6.9.9-5-Q16-x64-static.exe /verySILENT /SP"
+#  - set IMAGEMAGICK_BINARY=c:\\Program Files\\ImageMagick-6.9.9-Q16\\convert.exe
+#  - set FFMPEG_BINARY=c:\\Program Files\\ImageMagick-6.9.9-Q16\\ffmpeg.exe
 
   # Check that we have the expected version and architecture for Python
   - "python --version"
@@ -122,7 +122,7 @@ install:
   # Upgrade to the latest version of pip to avoid it displaying warnings
   # about it being out of date.
   - pip install --disable-pip-version-check --user --upgrade pip
-  - pip install --upgrade setuptools
+  - pip install --user --upgrade setuptools
 
 build_script:
 
