@@ -132,8 +132,8 @@ install:
   - pip install --disable-pip-version-check --user --upgrade pip
   - pip install --user --upgrade setuptools
 
-  - dir ffmpeg*.exe //s
-  - ps: "ls \"C:\\Miniconda\\pkgs\\ffmpeg-3.2.4-1\"" -Recurse
+  - "dir ffmpeg*.exe //s"
+  - ps: "ls \"C:\\Miniconda\\pkgs\\ffmpeg-3.2.4-1\" -Recurse"
 
 build_script:
 
