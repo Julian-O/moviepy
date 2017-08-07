@@ -17,7 +17,6 @@ environment:
   matrix:
   
      # MoviePy supports Python 2.7 and 3.3 onwards.
-     # However, matplotlib is not available on Python 3.3, so skip that.
      # Test the latest known patch in each version
      # Test the oldest and the newest 32 bit release. 64-bit otherwise.
   
@@ -57,7 +56,7 @@ environment:
       MINICONDA: C:\Miniconda
       CONDA_INSTALL: "numpy"
 
-    - PYTHON: "C:\\Python34-x64"
+    - PYTHON: "C:\\Python34"
       PYTHON_VERSION: "3.6.1"
       PYTHON_ARCH: "32"
       MINICONDA: C:\Miniconda36
@@ -100,17 +99,10 @@ install:
   - set IMAGEMAGICK_BINARY=c:\\Program Files\\ImageMagick-6.9.9-Q16\\convert.exe
   - set FFMPEG_BINARY=c:\\Program Files\\ImageMagick-6.9.9-Q16\\ffmpeg.exe
 
-  # Install Python (from the official .msi of http://python.org) and pip when
-  # not already installed.
-  # Note: Never seen this happen. 
-  # When it does, copy install.ps1 from  https://github.com/ogrisel/python-appveyor-demo into Appveyor
-  # directory and submit it to the project.
-  - ps: if (-not(Test-Path($env:PYTHON))) { & appveyor\install.ps1 }
-
   # Prepend newly installed Python to the PATH of this build (this cannot be
   # done from inside the powershell script as it would require to restart
   # the parent CMD process).
-  - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
+  # - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
 
   # Check that we have the expected version and architecture for Python
   - "python --version"
@@ -137,8 +129,6 @@ build_script:
   # Let Miniconda  install them because PIP finds some packages challenging.
   # - "conda create -q -n test-environment python=%PYTHON_VERSION% --file moviepy.egg-info/requires.txt"
   - conda create -q -n test-environment python=%PYTHON_VERSION% %CONDA_INSTALL%
-
-
   - activate test-environment
   
   # Build the compiled extension
