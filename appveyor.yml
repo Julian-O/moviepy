@@ -130,7 +130,7 @@ install:
   - pip install --disable-pip-version-check --user --upgrade pip
 
   # Conda sometimes selects an old version - that doesn't handle environment markers.
-  - conda install --upgrade setuptools
+  - conda install setuptools
 
 build_script:
 
