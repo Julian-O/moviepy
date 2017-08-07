@@ -31,11 +31,10 @@ script:
   - python setup.py test --pytest-args "tests/ --doctest-modules -v --cov moviepy --cov-report term-missing"
   # Now the *code* is tested, let's check that the setup is compatible with PIP without falling over.
   - pip install -e .
-  - pip install -e .[doc]
   - pip install -e .[optional]
   - pip install -e .[test]
-
-
+  # Only test doc generation on latest. Doesn't work on some earlier versions (3.3), but doesn't matter.
+  - if [[ $TRAVIS_PYTHON_VERSION == '3.6' ]]; then pip install -e .[doc] fi
 
 after_success:
   - coveralls
