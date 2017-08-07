@@ -17,8 +17,9 @@ environment:
   matrix:
   
      # MoviePy supports Python 2.7 and 3.3 onwards.
-     # Test the latest known patch in each version
-     # Test the oldest and the newest 32 bit release. 64-bit otherwise.
+     # Strategy:
+     #    Test the latest known patch in each version
+     #    Test the oldest and the newest 32 bit release. 64-bit otherwise.
   
     - PYTHON: "C:\\Python27-x64"
       PYTHON_VERSION: "2.7.13"
@@ -126,12 +127,7 @@ install:
 
 build_script:
 
-  # # Dump a list of required files.
-  # - "%CMD_IN_ENV% python c:\\projects\\moviepy\\setup.py egg_info"
-  # - TYPE moviepy.egg-info\\requires.txt
-  
-  # Let Miniconda  install them because PIP finds some packages challenging.
-  # - "conda create -q -n test-environment python=%PYTHON_VERSION% --file moviepy.egg-info/requires.txt"
+  # PIP finds some packages challenging. Let Miniconda install them.
   - conda create -q -n test-environment python=%PYTHON_VERSION% %CONDA_INSTALL%
   - activate test-environment
   
@@ -142,16 +138,19 @@ test_script:
   # Run the project tests
   - "%CMD_IN_ENV% python c:\\projects\\moviepy\\setup.py test"
 
-after_test:
-  # If tests are successful, create binary packages for the project.
-  - "%CMD_IN_ENV% python c:\\projects\\moviepy\\setup.py bdist_wheel"
-  - "%CMD_IN_ENV% python c:\\projects\\moviepy\\setup.py bdist_wininst"
-  - "%CMD_IN_ENV% python c:\\projects\\moviepy\\setup.py bdist_msi"
-  - ps: "ls dist"
-
-artifacts:
-  # Archive the generated packages in the ci.appveyor.com build report.
-  - path: dist\*
-
-#on_success:
-#  - TODO: upload the content of dist/*.whl to a public wheelhouse
+# Pending a version number that is supported (e.g. 0.3.0)
+#
+# after_test:
+#
+# # If tests are successful, create binary packages for the project.
+# - "%CMD_IN_ENV% python c:\\projects\\moviepy\\setup.py bdist_wheel"
+# - "%CMD_IN_ENV% python c:\\projects\\moviepy\\setup.py bdist_wininst"
+# - "%CMD_IN_ENV% python c:\\projects\\moviepy\\setup.py bdist_msi"
+# - ps: "ls dist"
+#
+# artifacts:
+#   # Archive the generated packages in the ci.appveyor.com build report.
+#   - path: dist\*
+#
+# on_success:
+#   - TODO: upload the content of dist/*.whl to a public wheelhouse
