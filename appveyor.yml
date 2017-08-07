@@ -121,6 +121,10 @@ install:
   # Dump the setup for debugging.
   - conda info -a
 
+  # PIP finds some packages challenging. Let Miniconda install them.
+  - conda create -q -n test-environment python=%PYTHON_VERSION% %CONDA_INSTALL%
+  - activate test-environment
+
   # Upgrade to the latest version of pip to avoid it displaying warnings
   # about it being out of date.
   - pip install --disable-pip-version-check --user --upgrade pip
@@ -130,10 +134,6 @@ install:
 
 build_script:
 
-  # PIP finds some packages challenging. Let Miniconda install them.
-  - conda create -q -n test-environment python=%PYTHON_VERSION% %CONDA_INSTALL%
-  - activate test-environment
-  
   # Build the compiled extension
   - "%CMD_IN_ENV% python c:\\projects\\moviepy\\setup.py build"
 
