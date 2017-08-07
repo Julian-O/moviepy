@@ -119,7 +119,6 @@ install:
   - conda update -q conda
   # Avoid SSL: CERTIFICATE_VERIFY_FAILED error when downloading media.
   - conda update openssl cryptography
-  - conda update certifi
   # Avoid warning from conda info.
   - conda install -n root _license
   # Dump the setup for debugging.
