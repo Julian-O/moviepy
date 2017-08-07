@@ -35,12 +35,14 @@ def download():
     # Loop through download url strings, build out path, and download the asset.
     for url in urls:
         _, tail = os.path.split(url)
-        download_url('{}/{}'.format(github_prefix, url), output.format(tail))
+        download_url(
+            url='{}/{}'.format(github_prefix, url),
+            filename=output.format(tail))
 
     # Download remaining asset.
-    # TO DO: Restore
-    # download_url('https://data.vision.ee.ethz.ch/cvl/video2gif/kAKZeIzs0Ag.mp4',
-    #             'media/video_with_failing_audio.mp4')
+    download_url(
+        url='https://data.vision.ee.ethz.ch/cvl/video2gif/kAKZeIzs0Ag.mp4',
+        filename='media/video_with_failing_audio.mp4')
 
 if __name__ == "__main__":
     download()
