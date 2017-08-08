@@ -34,7 +34,7 @@ environment:
       CONDA_INSTALL: "numpy"
 
     - PYTHON: "C:\\Python34-x64"
-      PYTHON_VERSION: "3.4.4"
+      PYTHON_VERSION: "3.4.6"
       PYTHON_ARCH: "64"
       MINICONDA: C:\Miniconda3-x64
       CONDA_INSTALL: "numpy"
@@ -46,7 +46,7 @@ environment:
       CONDA_INSTALL: "numpy"
 
     - PYTHON: "C:\\Python36-x64"
-      PYTHON_VERSION: "3.6.1"
+      PYTHON_VERSION: "3.6.2"
       PYTHON_ARCH: "64"
       MINICONDA: C:\Miniconda36-x64
       CONDA_INSTALL: "numpy"
@@ -58,7 +58,7 @@ environment:
       CONDA_INSTALL: "numpy"
 
     - PYTHON: "C:\\Python34"
-      PYTHON_VERSION: "3.6.1"
+      PYTHON_VERSION: "3.6.2"
       PYTHON_ARCH: "32"
       MINICONDA: C:\Miniconda36
       CONDA_INSTALL: "numpy"
@@ -94,19 +94,15 @@ install:
   # the parent CMD process).
   - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
 
-  # Check that we have the expected set-up.
-  - "ECHO We specified %PYTHON_VERSION% win%PYTHON_ARCH%"
-  - "python --version"
-  - "python -c \"import struct; print('Architecture is win'+str(struct.calcsize('P') * 8))\""
+  # Prepare Miniconda.
   - "ECHO Miniconda is installed in %MINICONDA%, and will be used to install %CONDA_INSTALL%"
 
-  # Prepare Miniconda.
   - "set PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q conda
 
   # Avoid warning from conda info.
-  - conda install -n root _license
+  - conda install -n -q root _license
   # Dump the setup for debugging.
   - conda info -a
 
@@ -132,6 +128,11 @@ install:
   - "ImageMagick-6.9.9-5-Q16-x64-static.exe /verySILENT /SP"
   - set IMAGEMAGICK_BINARY=c:\\Program Files\\ImageMagick-6.9.9-Q16\\convert.exe
   - set FFMPEG_BINARY=c:\\Program Files\\ImageMagick-6.9.9-Q16\\ffmpeg.exe
+
+  # Check that we have the expected set-up.
+  - "ECHO We specified %PYTHON_VERSION% win%PYTHON_ARCH%"
+  - "python --version"
+  - "python -c \"import struct; print('Architecture is win'+str(struct.calcsize('P') * 8))\""
 
 build_script:
 
