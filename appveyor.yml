@@ -119,6 +119,8 @@ install:
   - activate test-environment
 
   # MoviePy needs to know where to find ffmpeg.
+  # Check it is there.
+  - "dir c:\\Miniconda\\envs\\test-environment\\Library\\bin"
   - set FFMPEG_BINARY=c:\\Miniconda\\envs\\test-environment\\Library\\bin\\ffmpeg.exe
 
   # Upgrade to the latest version of pip to avoid it displaying warnings
