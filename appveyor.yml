@@ -25,43 +25,43 @@ environment:
       PYTHON_VERSION: "2.7.13"
       PYTHON_ARCH: "64"
       MINICONDA: C:\Miniconda
-      CONDA_INSTALL: "numpy ffmpeg"
+      CONDA_INSTALL: "numpy"
       
     - PYTHON: "C:\\Python33-x64"
       PYTHON_VERSION: "3.3.5"
       PYTHON_ARCH: "64"
       MINICONDA: C:\Miniconda3-x64
-      CONDA_INSTALL: "numpy ffmpeg"
+      CONDA_INSTALL: "numpy"
 
     - PYTHON: "C:\\Python34-x64"
       PYTHON_VERSION: "3.4.4"
       PYTHON_ARCH: "64"
       MINICONDA: C:\Miniconda3-x64
-      CONDA_INSTALL: "numpy ffmpeg"
+      CONDA_INSTALL: "numpy"
 
     - PYTHON: "C:\\Python35-x64"
       PYTHON_VERSION: "3.5.3"
       PYTHON_ARCH: "64"
       MINICONDA: C:\Miniconda35-x64
-      CONDA_INSTALL: "numpy ffmpeg"
+      CONDA_INSTALL: "numpy"
 
     - PYTHON: "C:\\Python36-x64"
       PYTHON_VERSION: "3.6.1"
       PYTHON_ARCH: "64"
       MINICONDA: C:\Miniconda36-x64
-      CONDA_INSTALL: "numpy ffmpeg"
+      CONDA_INSTALL: "numpy"
 
     - PYTHON: "C:\\Python27"
       PYTHON_VERSION: "2.7.13"
       PYTHON_ARCH: "32"
       MINICONDA: C:\Miniconda
-      CONDA_INSTALL: "numpy ffmpeg"
+      CONDA_INSTALL: "numpy"
 
     - PYTHON: "C:\\Python34"
       PYTHON_VERSION: "3.6.1"
       PYTHON_ARCH: "32"
       MINICONDA: C:\Miniconda36
-      CONDA_INSTALL: "numpy ffmpeg"
+      CONDA_INSTALL: "numpy"
 
 install:
   # If there is a newer build queued for the same PR, cancel this one.
@@ -100,14 +100,10 @@ install:
   - "python -c \"import struct; print('Architecture is win'+str(struct.calcsize('P') * 8))\""
   - "ECHO Miniconda is installed in %MINICONDA%, and will be used to install %CONDA_INSTALL%"
 
-
   # Prepare Miniconda.
   - "set PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q conda
-
-  # To find ffmpeg, provide a channel.
-  - conda config --append channels conda-forge
 
   # Avoid warning from conda info.
   - conda install -n root _license
@@ -118,18 +114,13 @@ install:
   - conda create --verbose -q -n test-environment python=%PYTHON_VERSION% %CONDA_INSTALL%
   - activate test-environment
 
-  # MoviePy needs to know where to find ffmpeg.
-  # Check it is there.
-  - "dir c:\\Miniconda\\envs\\test-environment\\Library\\bin"
-  - set FFMPEG_BINARY=c:\\Miniconda\\envs\\test-environment\\Library\\bin\\ffmpeg.exe
-
   # Upgrade to the latest version of pip to avoid it displaying warnings
   # about it being out of date.
   - pip install --disable-pip-version-check --user --upgrade pip
   - pip install --user --upgrade setuptools
 
 
-  # Install ImageMagick (which also installs ffmpeg, but that is covered.)
+  # Install ImageMagick (which also installs ffmpeg.)
   # This installation process is a big fragile, as new releases are issued, but no Conda package exists yet.
   - "ECHO Downloading ImageMagick"
     # Versions >=7.0 have problems - executables changed names.
@@ -140,6 +131,7 @@ install:
   - "ECHO Installing ImageMagick"
   - "ImageMagick-6.9.9-5-Q16-x64-static.exe /verySILENT /SP"
   - set IMAGEMAGICK_BINARY=c:\\Program Files\\ImageMagick-6.9.9-Q16\\convert.exe
+  - set FFMPEG_BINARY=c:\\Program Files\\ImageMagick-6.9.9-Q16\\ffmpeg.exe
 
 build_script:
 
@@ -150,7 +142,7 @@ test_script:
   # Run the project tests
   - "%CMD_IN_ENV% python c:\\projects\\moviepy\\setup.py test"
 
-# Pending a version number that is supported (e.g. 0.3.0)
+# TODO: Support the post-test generation of binaries - Pending a version number that is supported (e.g. 0.3.0)
 #
 # after_test:
 #
