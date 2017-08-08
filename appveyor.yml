@@ -102,7 +102,7 @@ install:
   - conda update -q conda
 
   # Avoid warning from conda info.
-  - conda install -n -q root _license
+  - conda install -q -n root _license
   # Dump the setup for debugging.
   - conda info -a
 
