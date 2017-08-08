@@ -34,7 +34,7 @@ environment:
       CONDA_INSTALL: "numpy"
 
     - PYTHON: "C:\\Python34-x64"
-      PYTHON_VERSION: "3.4.6"
+      PYTHON_VERSION: "3.4.5"
       PYTHON_ARCH: "64"
       MINICONDA: C:\Miniconda3-x64
       CONDA_INSTALL: "numpy"
